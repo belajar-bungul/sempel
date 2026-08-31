@@ -12,7 +12,7 @@
         'security/sam_security.xml',
         'security/ir.model.access.csv',
         'views/sam_profile_views.xml',
-        'debranding/views/debranding_templates.xml',
+        # 'debranding/views/debranding_templates.xml',
     ],
     'assets': {
         'web.assets_backend': [
