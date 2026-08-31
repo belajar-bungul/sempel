@@ -223,7 +223,7 @@
     <!-- MENUITEMS -->
     <menuitem id="sam_menu_root"
               name="ASAM"
-              web_icon="ara_simplify_access_management,static/description/icon.png"
+              web_icon="simplify_access_management_by_ara,static/description/icon.png"
               sequence="90"/>
 
     <menuitem id="sam_menu_main"
