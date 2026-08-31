@@ -223,10 +223,10 @@ class SamProfile(models.Model):
         return res
 
     DEBRANDING_VIEW_XMLIDS = (
-        'ara_simplify_access_management.debrand_login_powered_by',
-        'ara_simplify_access_management.debrand_mail_layout_footer',
-        'ara_simplify_access_management.debrand_mail_light_footer',
-        'ara_simplify_access_management.debrand_portal_record_sidebar',
+        'simplify_access_management_by_ara.debrand_login_powered_by',
+        'simplify_access_management_by_ara.debrand_mail_layout_footer',
+        'simplify_access_management_by_ara.debrand_mail_light_footer',
+        'simplify_access_management_by_ara.debrand_portal_record_sidebar',
     )
 
     @api.model
