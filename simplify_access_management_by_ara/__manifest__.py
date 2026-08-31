@@ -7,7 +7,7 @@
     'author': 'ARA SOFT',
     'maintainer': 'ARA SOFT',
     'website': '',
-    'license': 'LGPL-3',
+    'license': 'OPL-1',    
     'depends': ['web', 'mail', 'base_import', 'bus', 'rpc'],
     'data': [
         'security/sam_security.xml',
