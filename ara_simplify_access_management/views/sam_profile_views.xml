@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- LIST VIEW -->
+    <record id="sam_profile_view_list" model="ir.ui.view">
+        <field name="name">sam.profile.view.list</field>
+        <field name="model">sam.profile</field>
+        <field name="arch" type="xml">
+            <list string="Access Manage Studio" decoration-muted="not active" multi_edit="1">
+                <field name="sequence" widget="handle"/>
+                <field name="name" class="fw-bold"/>
+                <field name="user_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                <field name="group_ids" widget="many2many_tags" optional="show"/>
+                <field name="company_ids" widget="many2many_tags" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- FORM VIEW -->
+    <record id="sam_profile_view_form" model="ir.ui.view">
+        <field name="name">sam.profile.view.form</field>
+        <field name="model">sam.profile</field>
+        <field name="arch" type="xml">
+            <form string="Record Apply Access Management">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    
+                    <div class="oe_title mb-4">
+                        <label for="name" class="oe_edit_only text-muted fs-6 mb-1"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. HR DEPARTMENT - ACCESS MENU" class="fw-bold"/>
+                        </h1>
+                    </div>
+
+                        <group string="Apply To" >
+                            <field name="active" invisible="1"/>
+                            <field name="user_ids" widget="many2many_tags" options="{'no_create': True}" placeholder="Select target users..."/>
+                            <field name="group_ids" widget="many2many_tags" options="{'no_create': True}" placeholder="Select user groups..."/>
+                            <field name="company_ids" widget="many2many_tags" options="{'no_create': True}" placeholder="All Companies (Global)"/>
+                        </group>
+                    <br/>                   
+                    <br/>                   
+
+                    <H5>
+                    Configuration Access and Controls
+                    </H5>
+                    <hr/>
+                    <notebook class="mt-4">
+                        <page string="General Disable Access">
+                            <group>
+                                <field name="disable_developer_mode" widget="boolean_toggle"/>
+                                <field name="disable_module_actions" widget="boolean_toggle"/>
+                                <field name="disable_import" widget="boolean_toggle"/>
+                                <field name="disable_export" widget="boolean_toggle"/>
+                                <field name="restrict_xmlrpc" widget="boolean_toggle"/>
+                                <field name="disable_login" widget="boolean_toggle"/>
+                                <field name="readonly_user" widget="boolean_toggle"/>
+                                <field name="hide_chatter_global" widget="boolean_toggle"/>
+                                <field name="hide_send_message_global" widget="boolean_toggle"/>
+                                <field name="hide_log_note_global" widget="boolean_toggle"/>
+                                <field name="hide_activities_global" widget="boolean_toggle"/>
+                            </group>
+                        </page>
+                        <page string="Model Rules" name="models">
+                            <field name="model_line_ids">
+                                <list editable="bottom">
+                                    <field name="model_id" options="{'no_create': True}"/>
+                                    <field name="model_name" column_invisible="1"/>
+                                    <field name="readonly" widget="boolean_toggle"/>
+                                    <field name="hide_create" widget="boolean_toggle"/>
+                                    <field name="hide_edit" widget="boolean_toggle"/>
+                                    <field name="hide_delete" widget="boolean_toggle"/>
+                                    <field name="hide_duplicate" widget="boolean_toggle"/>
+                                    <field name="hide_archive" widget="boolean_toggle"/>
+                                    <field name="hide_export" widget="boolean_toggle"/>
+                                    <field name="hide_import" widget="boolean_toggle"/>
+                                    <field name="hide_search" widget="boolean_toggle"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <page string="Field Rules" name="fields" icon="fa-list-alt">
+                            <field name="field_line_ids">
+                                <list editable="bottom">
+                                    <field name="model_id" options="{'no_create': True}"/>
+                                    <field name="field_id" options="{'no_create': True}"/>
+                                    <field name="invisible" widget="boolean_toggle"/>
+                                    <field name="readonly" widget="boolean_toggle"/>
+                                    <field name="required" widget="boolean_toggle"/>
+                                    <field name="remove_link" widget="boolean_toggle"/>
+                                    <field name="no_create" widget="boolean_toggle"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <page string="Record Rules" name="records" icon="fa-filter">
+                            <field name="domain_line_ids">
+                                <list editable="bottom">
+                                    <field name="model_id" options="{'no_create': True}"/>
+                                    <field name="domain"/>
+                                    <field name="perm_read"/>
+                                    <field name="perm_write"/>
+                                    <field name="perm_create"/>
+                                    <field name="perm_unlink"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <page string="Disable Type Views" name="views" icon="fa-eye-slash">
+                            <field name="view_line_ids">
+                                <list editable="bottom">
+                                    <field name="model_id" options="{'no_create': True}"/>
+                                    <field name="view_type"/>
+                                </list>
+                            </field>
+                        </page>
+
+
+
+                        <page string="Debranding" name="debranding" icon="fa-paint-brush">
+                            <div class="alert alert-info border-0 shadow-sm rounded-3 mb-4" role="alert">
+                                <div class="d-flex align-items-center">
+                                    <i class="fa fa-info-circle fa-2x me-3 text-info"/>
+                                    <div>
+                                        <strong>Global Debranding Settings:</strong>
+                                        <p class="mb-0 small text-muted">
+                                            When enabled, globally hides "Powered by Odoo" on login page, browser tab title, notification email footer branding, odoo.com links in user menu, and PWA app name.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <group>
+                                <group string="Brand Identity">
+                                    <field name="debranding" widget="boolean_toggle"/>
+                                    <field name="brand_name" invisible="not debranding" placeholder="Leave empty to use company name"/>
+                                    <field name="url_prefix" invisible="not debranding" placeholder="e.g. app"/>
+                                </group>
+                                <group string="Assets" invisible="not debranding">
+                                    <field name="favicon" widget="image" class="oe_avatar ms-0" options="{'preview_image': 'favicon'}"/>
+                                </group>
+                            </group>
+                        </page>
+
+
+                    </notebook> 
+
+                    <br/>                       
+                    <br/>                   
+                
+                    <H5>
+                    HIDE COMPONENTS
+                    </H5>
+                    <hr/>
+                    <notebook>
+                        <page string="Hide Menus" name="menus" icon="fa-sitemap">
+                            <field name="hide_menu_ids" context="{'ir.ui.menu.full_list': True}">
+                                <list>
+                                    <field name="complete_name" string="Menu Path"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Hide Buttons / Tabs" name="buttons" icon="fa-toggle-on">
+                            <field name="button_line_ids">
+                                <list editable="bottom">
+                                    <field name="model_id" options="{'no_create': True}"/>
+                                    <field name="element_type"/>
+                                    <field name="name" placeholder="Technical name"/>
+                                    <field name="string" placeholder="Label name"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <page string="Hide Filters / Group" name="filters" icon="fa-search-plus">
+                            <field name="filter_line_ids">
+                                <list editable="bottom">
+                                    <field name="model_id" options="{'no_create': True}"/>
+                                    <field name="name"/>
+                                    <field name="string"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Hide Reports / Actions" name="reports_actions" icon="fa-file-text-o">
+                            <group>
+                                <field name="hidden_report_ids" widget="many2many_tags" options="{'no_create': True}" placeholder="Select reports to hide..."/>
+                                <field name="hidden_action_ids" widget="many2many_tags" options="{'no_create': True}" placeholder="Select server actions to hide..."/>
+                            </group>
+                        </page>
+                        <page string="Hide Chatter" name="chatter" icon="fa-comments">
+
+                            <field name="chatter_line_ids">
+                                <list editable="bottom">
+                                    <field name="model_id" options="{'no_create': True}"/>
+                                    <field name="hide_chatter" widget="boolean_toggle"/>
+                                    <field name="hide_send_message" widget="boolean_toggle"/>
+                                    <field name="hide_log_note" widget="boolean_toggle"/>
+                                    <field name="hide_activities" widget="boolean_toggle"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- ACTION -->
+    <record id="sam_profile_action" model="ir.actions.act_window">
+        <field name="name">Record Access</field>
+        <field name="res_model">sam.profile</field>
+        <field name="view_mode">list,form</field>
+        <!-- <field name="search_view_id" ref="sam_profile_view_search"/> -->
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first access configuration profile
+            </p>
+            <p>
+                Select users, groups, or companies to apply granular restrictions for models, fields, menus, chatter, and debranding settings.
+            </p>
+        </field>
+    </record>
+
+    <!-- MENUITEMS -->
+    <menuitem id="sam_menu_root"
+              name="ASAM"
+              web_icon="ara_simplify_access_management,static/description/icon.png"
+              sequence="90"/>
+
+    <menuitem id="sam_menu_main"
+              name="Record Access Management"
+              parent="sam_menu_root"
+              action="sam_profile_action"
+              sequence="10"/>
+
+</odoo>

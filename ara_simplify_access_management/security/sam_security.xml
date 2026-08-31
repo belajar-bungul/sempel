@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- 1. Deklarasi Group -->
+    <record id="group_sam_manager" model="res.groups">
+        <field name="name">YES</field>
+        <field name="comment">Can create and manage Access Manage Studio configurations.</field>
+    </record>
+
+    <!-- 2. Hubungkan ke Extra Rights via Privilege -->
+    <record id="privilege_sam_manager" model="res.groups.privilege">
+        <field name="name">Simplify Access Management</field>
+        <field name="category_id" ref="base.module_category_extra"/>
+        <field name="group_ids" eval="[(4, ref('ara_simplify_access_management.group_sam_manager'))]"/>
+    </record>
+
+    <!-- 3. Assign Group ke Admin User -->
+    <record id="base.user_admin" model="res.users">
+        <field name="group_ids" eval="[(4, ref('ara_simplify_access_management.group_sam_manager'))]"/>
+    </record>
+
+</odoo>
