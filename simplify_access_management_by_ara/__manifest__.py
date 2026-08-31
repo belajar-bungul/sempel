@@ -7,7 +7,7 @@
     'author': 'ARA SOFT',
     'maintainer': 'ARA SOFT',
     'license': 'OPL-1',    
-    'depends': ['web', 'mail', 'base_import', 'bus', 'rpc'],
+    'depends': ['web', 'mail', 'base_import', 'bus'],
     'data': [
         'security/sam_security.xml',
         'security/ir.model.access.csv',
