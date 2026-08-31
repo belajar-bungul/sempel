@@ -6,7 +6,6 @@
     'summary': 'All-in-one access control for fields, models, menus, records, & system UI, plus complete white-label debranding.',
     'author': 'ARA SOFT',
     'maintainer': 'ARA SOFT',
-    'website': '',
     'license': 'OPL-1',    
     'depends': ['web', 'mail', 'base_import', 'bus', 'rpc'],
     'data': [
